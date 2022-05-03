@@ -45,6 +45,15 @@ public class Recipient extends CoseMessage {
       return this;
     }
 
+    public Builder withProtectedHeaders(Map protectedHeaders) {
+      if (protectedHeaders == null || protectedHeaders.getKeys().size() == 0) {
+        this.protectedHeaderBytes = new byte[0];
+      } else {
+        this.protectedHeaderBytes = CborUtils.encode(protectedHeaders);
+      }
+      return this;
+    }
+
     public Builder withUnprotectedHeaders(Map unprotectedHeaders) {
       this.unprotectedHeaders = unprotectedHeaders;
       return this;
