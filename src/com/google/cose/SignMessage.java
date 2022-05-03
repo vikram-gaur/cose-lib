@@ -45,6 +45,9 @@ public class SignMessage extends CoseMessage {
     }
 
     public Builder withProtectedHeaders(Map protectedHeaders) {
+      if (protectedHeaderBytes != null) {
+        throw new CoseException("Cannot use both withProtectedHeaderBytes and withProtectedHeaders");
+      }
       if (protectedHeaders == null || protectedHeaders.getKeys().size() == 0) {
         this.protectedHeaderBytes = new byte[0];
       } else {
